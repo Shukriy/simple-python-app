@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: simple-python-app
+  name: simple-python-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-python-app
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: simple-python-app
+    spec:
+      containers:
+      - image: shukritech/simple-python-app:v1
+        name: simple-python-app
+        ports:
+        - containerPort: 5000
+        resources: {}
+status: {}
