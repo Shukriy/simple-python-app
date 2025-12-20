@@ -6,8 +6,10 @@ app = Flask(__name__)
 
 @app.route('/api/v1/details', methods=['GET'])
 def get_details():
-    return {"time": datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S'),
-            "hostname": socket.gethostname()
+    return {
+            "time": datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S'),
+            "hostname": socket.gethostname(),
+            "message": "Hello from Simple Python App!"
             }
 
 @app.route('/api/v1/healthz', methods=['GET'])
