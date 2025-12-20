@@ -23,4 +23,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: shukritech/simple-python-app:${{github.sha::6}}
+          tags: shukritech/simple-python-app:${{GITHUB_SHA::6}}
