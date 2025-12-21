@@ -41,12 +41,12 @@ jobs:
       -
         name: Install and configure ArgoCD CLI
         run: |
-          curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+          curl -sSL -o argocd-linux-amd64 http://argocd-server.argocd/download/argocd-linux-arm64
           chmod +x argocd-linux-amd64
           mv argocd-linux-amd64 ./argocd
           
       -
-        name: Login to ArgoCD
+        name: Login and sync ArgoCD application
         run: |
           ./argocd login argocd-server.argocd \
             --username admin \
@@ -54,7 +54,4 @@ jobs:
             --insecure \
             --plaintext \
             --grpc-web
-            
-      -
-        name: Sync ArgoCD app
-        run: ./argocd app sync app --grpc-web
+          ./argocd app sync app --grpc-web
