@@ -9,7 +9,7 @@ def get_details():
     return {
             "time": datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S'),
             "hostname": socket.gethostname(),
-            "message": "Hello from Simple Python App! :)"
+            "message": "Hello from Simple Python App!"
             }
 
 @app.route('/api/v1/healthz', methods=['GET'])
