@@ -59,6 +59,9 @@ jobs:
           propertyPath: 'image.tag'
           value: ${{ needs.ci.outputs.sha_short }}
           createPR: false
+          branch: main
+          masterBranchName: main
+          targetBranch: main
           message: 'Update Image Version to ${{ needs.ci.outputs.sha_short }}'
       -
         name: Login and sync ArgoCD application
