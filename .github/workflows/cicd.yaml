@@ -10,6 +10,8 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    outputs:
+      sha_short: ${{ steps.slug.outputs.sha_short }}
     steps:
       -
         name: Checkout
@@ -39,12 +41,25 @@ jobs:
     needs: ci
     steps:
       -
+        name: Checkout
+        uses: actions/checkout@v4
+        
+      -
         name: Install and configure ArgoCD CLI
         run: |
           curl -sSL -o argocd-linux-amd64 http://argocd-server.argocd/download/argocd-linux-arm64
           chmod +x argocd-linux-amd64
           mv argocd-linux-amd64 ./argocd
-          
+
+      - 
+        name: Update image python app tag
+        uses: OpsVerseIO/image-updater-action@0.1.0
+        with:
+          valueFile: 'charts/simple-python-app/values.yaml'
+          propertyPath: 'image.tag'
+          value: ${{ needs.ci.outputs.sha_short }}
+          createPR: false
+          message: 'Update Image Version to ${{ needs.ci.outputs.sha_short }}'
       -
         name: Login and sync ArgoCD application
         run: |
