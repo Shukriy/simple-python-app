@@ -48,10 +48,11 @@ jobs:
       -
         name: Login to ArgoCD
         run: |
-          ./argocd login argocd-server.argocd:443 \
+          ./argocd login argocd-server.argocd \
             --username admin \
             --password ${{ secrets.ARGOCD_ADMIN_PASSWORD }} \
             --insecure \
+            --plaintext \
             --grpc-web
             
       -
