@@ -36,7 +36,7 @@ jobs:
 
   cd:
     runs-on: local-k8s-runners
-    needs: cd
+    needs: ci
     steps:
       -
         name: Argocd login
