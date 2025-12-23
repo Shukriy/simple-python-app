@@ -67,6 +67,7 @@ jobs:
         name: commit changes
         uses: EndBug/add-and-commit@v9
         with:
+          add: 'charts/simple-python-app/values.yaml'
           message: "ci: update image tag to ${{ needs.ci.outputs.sha_short }}"
 
       -
