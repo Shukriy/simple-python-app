@@ -56,17 +56,18 @@ jobs:
           mv argocd-linux-amd64 ./argocd
 
       - 
-        name: Update image python app tag
-        uses: OpsVerseIO/image-updater-action@0.1.0
+        name: Modify value file to update image tag
+        run: |
+          echo ${{needs.ci.outputs.sha_short}}
+          pip install yq
+          yq -Yi '.image.tag = "${{ needs.ci.outputs.sha_short}}"' 'charts/simple-python-app/values.yaml'
+
+      - 
+        name: commit changes
+        uses: EndBug/add-and-commit@v9
         with:
-          valueFile: 'charts/simple-python-app/values.yaml'
-          propertyPath: 'image.tag'
-          value: ${{ needs.ci.outputs.sha_short }}
-          createPR: false
-          branch: main
-          masterBranchName: main
-          targetBranch: main
-          message: 'Update Image Version to ${{ needs.ci.outputs.sha_short }}'
+          message: "ci: update image tag to ${{ needs.ci.outputs.sha_short }}"
+
       -
         name: Login and sync ArgoCD application
         run: |
