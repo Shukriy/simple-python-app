@@ -2,7 +2,7 @@ replicaCount: 1
 image:
   repository: shukritech/simple-python-app
   pullPolicy: IfNotPresent
-  tag: b696af
+  tag: "790189"
 imagePullSecrets: []
 nameOverride: ''
 fullnameOverride: ''
