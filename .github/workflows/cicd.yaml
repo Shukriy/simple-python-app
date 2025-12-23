@@ -59,8 +59,9 @@ jobs:
         name: Modify value file to update image tag
         run: |
           echo ${{needs.ci.outputs.sha_short}}
-          pip install yq
-          yq -Yi '.image.tag = "${{ needs.ci.outputs.sha_short}}"' 'charts/simple-python-app/values.yaml'
+          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O yq
+          chmod +x yq
+          ./yq -Yi '.image.tag = "${{ needs.ci.outputs.sha_short}}"' 'charts/simple-python-app/values.yaml'
 
       - 
         name: commit changes
