@@ -1,0 +1,11 @@
+site_name: 'Simple Python App'
+site_description: 'REST API service with health check and info endpoints'
+repo_url: https://github.com/Shukriy/simple-python-app
+edit_uri: edit/master/docs
+
+plugins:
+  - techdocs-core
+
+nav:
+  - Home: docs/index.md
+  
